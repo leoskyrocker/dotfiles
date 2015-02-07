@@ -29,48 +29,48 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Startup "
-set nocompatible | filetype indent plugin on | syn on
-let g:vim_addon_manager = {}
-let g:vim_addon_manager.shell_commands_run_method='system'
+ set nocompatible | filetype indent plugin on | syn on
+ let g:vim_addon_manager = {}
+ let g:vim_addon_manager.shell_commands_run_method='system'
 
-call SetupVAM()
-" use <c-x><c-p> to complete plugin names
+ call SetupVAM()
+ " use <c-x><c-p> to complete plugin names
 
-" My plugin declarations
-VAMActivate ag
-VAMActivate ctrlp
-VAMActivate delimitMate
-VAMActivate EasyMotion
-VAMActivate fugitive
-VAMActivate github:airblade/vim-gitgutter
-VAMActivate github:flazz/vim-colorschemes
-VAMActivate github:jelera/vim-javascript-syntax
-VAMActivate github:MarcWeber/vim-addon-local-vimrc
-VAMActivate github:mschartman/yartr
-VAMActivate github:nathanaelkane/vim-indent-guides
-VAMActivate github:pangloss/vim-javascript
-VAMActivate github:scrooloose/nerdtree
-VAMActivate github:tpope/vim-bundler
-VAMActivate html5
-VAMActivate molokai
-VAMActivate rails
-VAMActivate Rubytest
-VAMActivate rust
-VAMActivate Syntastic
-VAMActivate Tabular
-VAMActivate tComment
-VAMActivate trailing-whitespace
-VAMActivate UltiSnips
-VAMActivate vim-coffee-script
-VAMActivate vim-snippets
-VAMActivate wmgraphviz
-VAMActivate YouCompleteMe
-" VAMActivate github:sjl/gundo.vim
+ " My plugin declarations
+ VAMActivate ag
+ VAMActivate ctrlp
+ VAMActivate delimitMate
+ VAMActivate EasyMotion
+ VAMActivate fugitive
+ VAMActivate github:airblade/vim-gitgutter
+ VAMActivate github:flazz/vim-colorschemes
+ VAMActivate github:jelera/vim-javascript-syntax
+ VAMActivate github:MarcWeber/vim-addon-local-vimrc
+ VAMActivate github:mschartman/yartr
+ VAMActivate github:nathanaelkane/vim-indent-guides
+ VAMActivate github:pangloss/vim-javascript
+ VAMActivate github:scrooloose/nerdtree
+ VAMActivate github:tpope/vim-bundler
+ VAMActivate html5
+ VAMActivate molokai
+ VAMActivate rails
+ VAMActivate Rubytest
+ VAMActivate rust
+ VAMActivate Syntastic
+ VAMActivate Tabular
+ VAMActivate tComment
+ VAMActivate trailing-whitespace
+ VAMActivate UltiSnips
+ VAMActivate vim-coffee-script
+ VAMActivate vim-snippets
+ VAMActivate wmgraphviz
+ VAMActivate YouCompleteMe
+ " VAMActivate github:sjl/gundo.vim
 
 " Autocmd "
- au VimEnter * call RestoreSession()
- au VimLeave * call OnVimLeave()
- au BufLeave,CursorHold,CursorHoldI,FocusLost * silent! wa " auto save
+ autocmd VimEnter * nested call RestoreSession()
+ autocmd VimLeave * call OnVimLeave()
+ autocmd BufLeave,CursorHold,CursorHoldI,FocusLost * silent! wa " autocmdto save
 
 " Mappings "
  " ctags opens in new tab
@@ -87,7 +87,8 @@ VAMActivate YouCompleteMe
  set number
  set autochdir
  set updatetime=750
- 
+ set sessionoptions-=options  " Don't save options
+
  "Ruby standards
  set shiftwidth=2
  set tabstop=2
