@@ -3,12 +3,34 @@
 . ~/.appfolio
 . ~/.rake_autocomplete
 . ~/.git-prompt.sh
+
+APM_BUNDLE='/Users/leolei/src/apm_bundle'
  
 alias g='git'
 alias ctags="`brew --prefix`/bin/ctags"
 alias e='mvim'
 alias update_gems='gems && find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin master \; && cd -'
- 
+
+#### RAILS ####
+alias reset='rake db:reset; RAILS_ENV=test rake db:reset;'
+alias create='rake db:create; RAILS_ENV=test rake db:create;'
+alias drop='rake db:drop; RAILS_ENV=test rake db:drop;'
+alias m='rake db:migrate; RAILS_ENV=test rake db:migrate;'
+alias rollback='rake db:rollback; RAILS_ENV=test rake db:rollback'
+alias b='bundle install --local'
+
+#### git ####
+alias st='git status'
+alias scm='git story-commit'
+alias cm='git commit'
+alias c='git co -'
+alias lg='git log --graph'
+alias branch='git co master && git pull && git co -b '
+alias add='git add -p'
+alias amend='git commit --amend --no-edit'
+alias amendwith='git commit --amend -m'
+alias resetto='git reset --hard'
+
 export VISUAL=mvim
 export EDITOR=mvim
  
@@ -73,6 +95,25 @@ function git-needs-push {
             echo " ⇪"
         fi
     fi
+}
+
+function copy_vhost_dbs()
+{
+  cd "$APM_BUNDLE/apps"
+
+  [ -z "$1" ] && echo "You have to specify a vhost name" && return
+
+  set -ex
+  for app in *; do
+    pushd "$app"
+    remote_dbname="${app}_$1"
+    local_dbname="${app}_development"
+    mysql -uroot -e "drop database $local_dbname; create database $local_dbname"
+    ssh back1.qa4 "mysqldump ${remote_dbname} | gzip" |
+    gunzip |
+    mysql -uroot "$local_dbname"
+    popd
+  done
 }
 
 function tall_unit()

@@ -1,3 +1,35 @@
+" YARTR "
+ let s:yartr_path=expand('<sfile>:p:h')
+
+ map <Leader>t :call YartrRunTestSingle()<CR>
+ map <Leader>T :call YartrRunTestAll()<CR>
+ 
+ function! YartrRunTestSingle()
+   normal |y$
+   let current_line=@"
+   let first_line_of_test_match=matchstr(current_line, 'def test.*')
+   if empty(first_line_of_test_match)
+     execute("?def test") | :normal wyw
+     let test_name=@"
+   else
+     :normal wwyw
+     let test_name=@"
+   endif
+   let file_path=expand('%:p')
+   let cd_dir=matchstr(file_path, 'engines/[^/]*')
+   let test_path= matchstr(file_path,'test/.*')
+   let file_path=substitute(file_path, "/test/.*", "", "")
+   execute "silent !osascript ".shellescape(s:yartr_path)."/yartr_lib/run_command 'cd '"file_path" ' && ruby -Itest ' "test_path" ' --name=' "test_name""
+ endfunction
+ 
+ function! YartrRunTestAll()
+   let file_path=@%
+   let cd_dir=matchstr(file_path, 'engines/[^/]*')
+   let test_path= matchstr(file_path,'test/.*')
+   let file_path=substitute(file_path, "/test/.*", "", "")
+   execute "silent !osascript ".shellescape(s:yartr_path)."/yartr_lib/run_command 'cd '"file_path" ' && ruby -Itest ' "test_path""
+ endfunction
+
 " Functions "
  function! RestoreSession()
    if argc() == 0 "vim called without arguments
@@ -46,7 +78,6 @@
  VAMActivate github:flazz/vim-colorschemes
  VAMActivate github:jelera/vim-javascript-syntax
  VAMActivate github:MarcWeber/vim-addon-local-vimrc
- VAMActivate github:mschartman/yartr
  VAMActivate github:nathanaelkane/vim-indent-guides
  VAMActivate github:pangloss/vim-javascript
  VAMActivate github:scrooloose/nerdtree
@@ -54,7 +85,7 @@
  VAMActivate html5
  VAMActivate molokai
  VAMActivate rails
- VAMActivate Rubytest
+ " VAMActivate Rubytest
  VAMActivate rust
  VAMActivate Syntastic
  VAMActivate Tabular
@@ -64,7 +95,7 @@
  VAMActivate vim-coffee-script
  VAMActivate vim-snippets
  VAMActivate wmgraphviz
- VAMActivate YouCompleteMe
+ " VAMActivate YouCompleteMe
  " VAMActivate github:sjl/gundo.vim
 
 " Autocmd "
@@ -73,6 +104,10 @@
  autocmd BufLeave,CursorHold,CursorHoldI,FocusLost * silent! wa " autocmdto save
 
 " Mappings "
+
+ " Add keyboard shortcuts
+ map <C-Tab> gt
+ map <C-S-Tab> gT
  " ctags opens in new tab
  :nnoremap <silent><Leader><C-]> <C-w><C-]><C-w>T
  nnoremap ; :
