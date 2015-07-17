@@ -22,6 +22,7 @@ alias b='bundle install --local'
 #### git ####
 alias st='git status'
 alias scm='git story-commit'
+alias pullreq='git story-pull-request'
 alias cm='git commit'
 alias c='git co -'
 alias lg='git log --graph'
@@ -95,6 +96,28 @@ function git-needs-push {
             echo " ⇪"
         fi
     fi
+}
+
+function nuke_solr() {
+  BLUE="\033[34m"
+  launchctl stop homebrew.mxcl.apache-solr-48
+  launchctl start homebrew.mxcl.apache-solr-48
+  echo -e "${BLUE}Fixing Solr for property"
+  rm config/solr_48/core.properties 2> /dev/null
+  rake solr:generate_data_config
+  rake solr:destroy_core 2> /dev/null
+  rake solr:create_core
+  echo -e "${BLUE}Fixing Solr for property test"
+  RAILS_ENV=test rake solr:destroy_core 2> /dev/null
+  RAILS_ENV=test rake solr:create_core
+  echo -e "${BLUE}Fixing Solr for property search engine"
+  cd engines/search
+  rm config/solr_48/core.properties 2> /dev/null
+  RAILS_ENV=test rake solr:destroy_core 2> /dev/null
+  RAILS_ENV=test rake solr:create_core
+  cd - > /dev/null
+  echo -e "${BLUE}Reindexing solr"
+  rake solr:reindex
 }
 
 function copy_vhost_dbs()

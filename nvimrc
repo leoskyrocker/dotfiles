@@ -33,13 +33,13 @@
 " Functions "
  function! RestoreSession()
    if argc() == 0 "vim called without arguments
-     execute 'source ~/.vim/Session.vim'
+     execute 'source ~/.nvim/Session.vim'
    end
  endfunction
 
  function! OnVimLeave()
    execute 'tabdo NERDTreeClose'
-   mksession! ~/.vim/Session.vim
+   mksession! ~/.nvim/Session.vim
  endfunction
 
  function! SetupVAM()
@@ -70,31 +70,34 @@
 
  " My plugin declarations
  VAMActivate ag
- VAMActivate ctrlp
+"  VAMActivate ctrlp
  VAMActivate delimitMate
- VAMActivate EasyMotion
+"  VAMActivate EasyMotion
  VAMActivate fugitive
  VAMActivate github:airblade/vim-gitgutter
- VAMActivate github:flazz/vim-colorschemes
- VAMActivate github:jelera/vim-javascript-syntax
+ VAMActivate github:altercation/vim-colors-solarized
+"  VAMActivate github:jelera/vim-javascript-syntax
+ VAMActivate github:junegunn/fzf
+ VAMActivate github:majutsushi/tagbar
  VAMActivate github:MarcWeber/vim-addon-local-vimrc
  VAMActivate github:nathanaelkane/vim-indent-guides
- VAMActivate github:pangloss/vim-javascript
+"  VAMActivate github:pangloss/vim-javascript
  VAMActivate github:scrooloose/nerdtree
  VAMActivate github:tpope/vim-bundler
- VAMActivate html5
- VAMActivate molokai
+"  VAMActivate html5
+"  VAMActivate molokai
  VAMActivate rails
  " VAMActivate Rubytest
- VAMActivate rust
- VAMActivate Syntastic
+"  VAMActivate rust
+"  VAMActivate Syntastic
  VAMActivate Tabular
  VAMActivate tComment
- VAMActivate trailing-whitespace
+"  VAMActivate trailing-whitespace
  VAMActivate UltiSnips
+ VAMActivate vim-airline
  VAMActivate vim-coffee-script
+ VAMActivate vim-ruby
  VAMActivate vim-snippets
- VAMActivate wmgraphviz
  " VAMActivate YouCompleteMe
  " VAMActivate github:sjl/gundo.vim
 
@@ -111,34 +114,51 @@
  " ctags opens in new tab
  :nnoremap <silent><Leader><C-]> <C-w><C-]><C-w>T
  nnoremap ; :
- map <C-Space> :NERDTreeToggle<CR>
+ map <NUL> :NERDTreeToggle<CR>
  nmap <C-f> :NERDTreeFind<CR>
+ nmap <c-p> :FZF<cr>
+ map <C-c> :.!pbcopy<cr>u
  nmap <C-e> :TagbarToggle<CR>
 
 " Set vars "
+ set rtp+=~/.fzf
+ set backspace=indent,eol,start
  set tags=./tags,tags;$HOME
- set background=dark
+ set background=light
  colorscheme solarized
  set number
- set autochdir
  set updatetime=750
  set sessionoptions-=options  " Don't save options
+ set mouse=a
+ " Persistent undo
+ set undofile
+ set undodir=$HOME/.vim/undo
+ set undolevels=1000
+ set undoreload=10000
 
  "Ruby standards
  set shiftwidth=2
  set tabstop=2
- 
- set cursorline
- set cursorcolumn
+
+"  set cursorline
+"  set cursorcolumn
  set expandtab
  set autoindent " always set autoindenting on
  set pastetoggle=<F2>
 
 " Application Specific "
  "*** ctrlp ****
-  let g:ctrlp_max_depth = 50
+  let g:ctrlp_max_depth = 30
   let g:ctrlp_max_files = 0
   let g:ctrlp_follow_symlinks = 1
   let g:ctrlp_clear_cache_on_exit = 0
  "*** NERDTree ****
   let NERDTreeChDirMode=2
+ "*** airline ****
+  " Just show the filename (no path) in the tab
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#fnamemod = ':t'
+  let g:airline#extensions#tabline#fnametruncate = 14
+  let g:airline#extensions#tabline#show_tab_nr = 1
+  let g:airline#extensions#tabline#show_tabs = 1
+  let g:airline#extensions#tabline#tab_nr_type = 1 "tab number type is tab number
