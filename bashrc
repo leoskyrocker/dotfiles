@@ -30,7 +30,8 @@ alias branch='git co master && git pull && git co -b '
 alias add='git add -p'
 alias amend='git commit --amend --no-edit'
 alias amendwith='git commit --amend -m'
-alias resetto='git reset --hard'
+
+alias pr='pry-remote'
 
 export VISUAL=mvim
 export EDITOR=mvim
