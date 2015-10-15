@@ -1,6 +1,8 @@
 alias g='git'
+alias lla='ls -la'
 alias ctags="`brew --prefix`/bin/ctags"
 alias e='nvim'
+alias find_gems='find . -name 'Gemfile' -o -name '*gemspec' | grep -v './vendor' | xargs grep $GEM | cut -d ':' -f 1 | sort | uniq | xargs echo'
 alias update_gems='gems && find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin master \; && cd -'
 
 #### RAILS ####
