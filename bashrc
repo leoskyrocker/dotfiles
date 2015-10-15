@@ -5,10 +5,10 @@
 . ~/.git-prompt.sh
 
 APM_BUNDLE='/Users/leolei/src/apm_bundle'
- 
+
 alias g='git'
 alias ctags="`brew --prefix`/bin/ctags"
-alias e='mvim'
+alias e='nvim'
 alias update_gems='gems && find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin master \; && cd -'
 
 #### RAILS ####

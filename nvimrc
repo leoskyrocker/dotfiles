@@ -92,7 +92,7 @@
 "  VAMActivate Syntastic
  VAMActivate Tabular
  VAMActivate tComment
-"  VAMActivate trailing-whitespace
+ VAMActivate trailing-whitespace
  VAMActivate UltiSnips
  VAMActivate vim-airline
  VAMActivate vim-coffee-script
