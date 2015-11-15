@@ -23,7 +23,7 @@
  endfunction
  
  function! YartrRunTestAll()
-   let file_path=@%
+   let file_path=expand('%:p')
    let cd_dir=matchstr(file_path, 'engines/[^/]*')
    let test_path= matchstr(file_path,'test/.*')
    let file_path=substitute(file_path, "/test/.*", "", "")

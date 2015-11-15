@@ -4,6 +4,7 @@ alias ctags="`brew --prefix`/bin/ctags"
 alias e='nvim'
 alias find_gems='find . -name 'Gemfile' -o -name '*gemspec' | grep -v './vendor' | xargs grep $GEM | cut -d ':' -f 1 | sort | uniq | xargs echo'
 alias update_gems='gems && find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin master \; && cd -'
+alias growl='terminal-notifier -title "Notification" -message'
 
 #### RAILS ####
 alias reset='rake db:reset; RAILS_ENV=test rake db:reset;'
@@ -26,3 +27,4 @@ alias amend='git commit --amend --no-edit'
 alias amendwith='git commit --amend -m'
 
 alias pr='pry-remote'
+alias review="cd `git rev-parse --show-toplevel`; pronto run; cd - > /dev/null;"

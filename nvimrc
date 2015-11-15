@@ -21,9 +21,9 @@
    let file_path=substitute(file_path, "/test/.*", "", "")
    execute "silent !osascript ".shellescape(s:yartr_path)."/yartr_lib/run_command 'cd '"file_path" ' && ruby -Itest ' "test_path" ' --name=' "test_name""
  endfunction
- 
+
  function! YartrRunTestAll()
-   let file_path=@%
+   let file_path=expand('%:p')
    let cd_dir=matchstr(file_path, 'engines/[^/]*')
    let test_path= matchstr(file_path,'test/.*')
    let file_path=substitute(file_path, "/test/.*", "", "")
@@ -76,6 +76,7 @@
  VAMActivate fugitive
  VAMActivate github:airblade/vim-gitgutter
  VAMActivate github:altercation/vim-colors-solarized
+ VAMActivate github:benekastah/neomake
 "  VAMActivate github:jelera/vim-javascript-syntax
  VAMActivate github:junegunn/fzf
  VAMActivate github:majutsushi/tagbar
@@ -87,7 +88,7 @@
 "  VAMActivate html5
 "  VAMActivate molokai
  VAMActivate rails
- " VAMActivate Rubytest
+"  VAMActivate Rubytest
 "  VAMActivate rust
 "  VAMActivate Syntastic
  VAMActivate Tabular
@@ -104,7 +105,8 @@
 " Autocmd "
  autocmd VimEnter * nested call RestoreSession()
  autocmd VimLeave * call OnVimLeave()
- autocmd BufLeave,CursorHold,CursorHoldI,FocusLost * silent! wa " autocmdto save
+"  autocmd BufLeave,CursorHold,CursorHoldI,FocusLost * silent! wa " autocmdto save
+ autocmd BufWritePost * Neomake
 
 " Mappings "
 
@@ -116,14 +118,14 @@
  nnoremap ; :
  map <NUL> :NERDTreeToggle<CR>
  nmap <C-f> :NERDTreeFind<CR>
- nmap <c-p> :FZF<cr>
+ nmap <c-p> :FZF -m<cr>
  map <C-c> :.!pbcopy<cr>u
  nmap <C-e> :TagbarToggle<CR>
 
 " Set vars "
  set rtp+=~/.fzf
  set backspace=indent,eol,start
- set tags=./tags,tags;$HOME
+"  set tags=./tags,tags;$HOME
  set background=light
  colorscheme solarized
  set number
@@ -142,6 +144,7 @@
 
 "  set cursorline
 "  set cursorcolumn
+ set nosmarttab
  set expandtab
  set autoindent " always set autoindenting on
  set pastetoggle=<F2>
@@ -162,3 +165,5 @@
   let g:airline#extensions#tabline#show_tab_nr = 1
   let g:airline#extensions#tabline#show_tabs = 1
   let g:airline#extensions#tabline#tab_nr_type = 1 "tab number type is tab number
+
+  let g:neomake_ruby_enabled_makers = ['rubocop']
