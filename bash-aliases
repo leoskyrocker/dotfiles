@@ -1,4 +1,5 @@
 alias g='git'
+alias ll='ls -l'
 alias lla='ls -la'
 alias ctags="`brew --prefix`/bin/ctags"
 alias e='nvim'
@@ -25,6 +26,7 @@ alias branch='git co master && git pull && git co -b '
 alias add='git add -p'
 alias amend='git commit --amend --no-edit'
 alias amendwith='git commit --amend -m'
+alias remotesync='git reset --hard `git branch -vv | grep "^*" | ag -o "(?<=\[)[^:\]]*"`'
 
 alias pr='pry-remote'
-alias review="cd `git rev-parse --show-toplevel`; pronto run; cd - > /dev/null;"
+alias review='cd `git rev-parse --show-toplevel`; pronto run; cd - > /dev/null;'

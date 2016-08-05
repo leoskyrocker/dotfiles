@@ -106,23 +106,28 @@
  autocmd VimEnter * nested call RestoreSession()
  autocmd VimLeave * call OnVimLeave()
 "  autocmd BufLeave,CursorHold,CursorHoldI,FocusLost * silent! wa " autocmdto save
- autocmd BufWritePost * Neomake
 
 " Mappings "
 
  " Add keyboard shortcuts
- map <C-Tab> gt
- map <C-S-Tab> gT
+ :map <C-Tab> gt
+ :map <C-S-Tab> gT
  " ctags opens in new tab
+ :map <NUL> :NERDTreeToggle<CR>
+ :map <C-c> :.!pbcopy<cr>u
+ :map <C-f> :NERDTreeFind<CR>
+ :map <C-p> :FZF -m<cr>
+ :map <C-e> :TagbarToggle<CR>
  :nnoremap <silent><Leader><C-]> <C-w><C-]><C-w>T
- nnoremap ; :
- map <NUL> :NERDTreeToggle<CR>
- nmap <C-f> :NERDTreeFind<CR>
- nmap <c-p> :FZF -m<cr>
- map <C-c> :.!pbcopy<cr>u
- nmap <C-e> :TagbarToggle<CR>
+ :nnoremap ; :
+ " windows navigation
+ :nnoremap ∑ <C-w><C-w>
+ :nnoremap ˙ <C-w>h
+ :nnoremap ∆ <C-w>j
+ :nnoremap ˚ <C-w>k
+ :nnoremap ¬ <C-w>l
 
-" Set vars "
+ " Set vars "
  set rtp+=~/.fzf
  set backspace=indent,eol,start
 "  set tags=./tags,tags;$HOME
@@ -148,6 +153,7 @@
  set expandtab
  set autoindent " always set autoindenting on
  set pastetoggle=<F2>
+ set clipboard=unnamed
 
 " Application Specific "
  "*** ctrlp ****
@@ -157,6 +163,8 @@
   let g:ctrlp_clear_cache_on_exit = 0
  "*** NERDTree ****
   let NERDTreeChDirMode=2
+  let NERDTreeQuitOnOpen=1
+  let NERDTreeMinimalUI=1
  "*** airline ****
   " Just show the filename (no path) in the tab
   let g:airline#extensions#tabline#enabled = 1
@@ -167,3 +175,14 @@
   let g:airline#extensions#tabline#tab_nr_type = 1 "tab number type is tab number
 
   let g:neomake_ruby_enabled_makers = ['rubocop']
+
+" Neovim ONLY
+ " Windows navigation for terminal mode
+ :tnoremap <Leader><Esc> <C-\><C-n>
+ :tnoremap ∑ <C-\><C-n><C-w><C-w>
+ :tnoremap ˙ <C-\><C-n><C-w>h
+ :tnoremap ∆ <C-\><C-n><C-w>j
+ :tnoremap ˚ <C-\><C-n><C-w>k
+ :tnoremap ¬ <C-\><C-n><C-w>l
+
+ autocmd BufWritePost * Neomake
