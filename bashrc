@@ -28,4 +28,4 @@ else
   COLORED_RVM_PROMPT=""
 fi
 
-export PS1="${GREEN}[\t]${COLORED_RVM_PROMPT} ${YELLOW}\$(__git_ps1 '(%s')${GREEN}\$(git-not-dirty)${RED}\$(git-dirty)${MAGENTA}\$(git-needs-push)${YELLOW}\$(__git_ps1 ' )')\n${BLUE}\w${RED} $ ${RESET}"
+export PS1="${CYAN}[\t]${COLORED_RVM_PROMPT} ${YELLOW}\$(__git_ps1 '(%s')${GREEN}\$(git-not-dirty)${RED}\$(git-dirty)${MAGENTA}\$(git-needs-push)${YELLOW}\$(__git_ps1 ' )')\n${BLUE}\w${GREEN} $ ${RESET}"
