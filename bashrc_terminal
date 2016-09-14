@@ -1,0 +1,23 @@
+# set colors
+ BLACK=$(tput setaf 0)
+ RED=$(tput setaf 1)
+ GREEN=$(tput setaf 2)
+ YELLOW=$(tput setaf 3)
+ BLUE=$(tput setaf 4)
+ MAGENTA=$(tput setaf 5)
+ CYAN=$(tput setaf 6)
+ WHITE=$(tput setaf 7)
+ RESET=$(tput sgr 0)
+
+ if brew list | grep coreutils > /dev/null ; then
+   alias ls='gls -F --show-control-chars --color=auto'
+   eval `gdircolors -b $HOME/.dircolors/solarized`
+ fi
+
+ alias grep='grep --color'
+ alias egrep='egrep --color'
+ alias fgrep='fgrep --color'
+
+# set default editor
+ export VISUAL=nvim
+ export EDITOR=nvim
