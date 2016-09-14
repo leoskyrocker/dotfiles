@@ -166,13 +166,30 @@
   let NERDTreeQuitOnOpen=1
   let NERDTreeMinimalUI=1
  "*** airline ****
+  let g:airline#extensions#default#layout = [
+    \ [ 'a', 'b', 'c' ],
+    \ [ 'x', 'y', 'z', 'warning' ]
+    \ ]
+  let g:airline_left_sep = ''
+  let g:airline_right_sep = ''
+  let g:airline_section_b = ''
+  let g:airline_section_c = '%f'
+  let g:airline_section_x = airline#section#create(['tagbar'])
+  let g:airline_section_y = '%p%%'
+  let g:airline_section_z = ''
+  let g:airline_skip_empty_sections = 1
   " Just show the filename (no path) in the tab
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#fnamemod = ':t'
-  let g:airline#extensions#tabline#fnametruncate = 14
+  let g:airline#extensions#tabline#fnametruncate = 30
   let g:airline#extensions#tabline#show_tab_nr = 1
   let g:airline#extensions#tabline#show_tabs = 1
   let g:airline#extensions#tabline#tab_nr_type = 1 "tab number type is tab number
+  let g:airline#extensions#tabline#show_tab_type = 0
+  let g:airline#extensions#tabline#left_sep = ''
+  let g:airline#extensions#tabline#left_alt_sep = ''
+  let g:airline#extensions#tabline#right_sep = ''
+  let g:airline#extensions#tabline#right_alt_sep = ''
 
   let g:neomake_ruby_enabled_makers = ['rubocop']
 
