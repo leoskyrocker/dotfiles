@@ -77,9 +77,10 @@
  VAMActivate github:airblade/vim-gitgutter
  VAMActivate github:altercation/vim-colors-solarized
  VAMActivate github:benekastah/neomake
-"  VAMActivate github:jelera/vim-javascript-syntax
+ VAMActivate github:jelera/vim-javascript-syntax
  VAMActivate github:junegunn/fzf
  VAMActivate github:majutsushi/tagbar
+ VAMActivate github:mxw/vim-jsx
  VAMActivate github:MarcWeber/vim-addon-local-vimrc
  VAMActivate github:nathanaelkane/vim-indent-guides
 "  VAMActivate github:pangloss/vim-javascript
@@ -96,6 +97,7 @@
  VAMActivate trailing-whitespace
  VAMActivate UltiSnips
  VAMActivate vim-airline
+ VAMActivate github:vim-airline/vim-airline-themes
  VAMActivate vim-coffee-script
  VAMActivate vim-ruby
  VAMActivate vim-snippets
@@ -154,6 +156,8 @@
  set autoindent " always set autoindenting on
  set pastetoggle=<F2>
  set clipboard=unnamed
+ set ignorecase " smartcase MUST BE used with ignorecase
+ set smartcase
 
 " Application Specific "
  "*** ctrlp ****
@@ -162,6 +166,7 @@
   let g:ctrlp_follow_symlinks = 1
   let g:ctrlp_clear_cache_on_exit = 0
  "*** NERDTree ****
+  let NERDTreeShowHidden=1
   let NERDTreeChDirMode=2
   let NERDTreeQuitOnOpen=1
   let NERDTreeMinimalUI=1
@@ -178,20 +183,29 @@
   let g:airline_section_y = '%p%%'
   let g:airline_section_z = ''
   let g:airline_skip_empty_sections = 1
-  " Just show the filename (no path) in the tab
   let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#fnamemod = ':t'
-  let g:airline#extensions#tabline#fnametruncate = 30
-  let g:airline#extensions#tabline#show_tab_nr = 1
+  "" Just show the filename (no path) in the tab
+  " let g:airline#extensions#tabline#fnamemod = ':t'
+  let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+  let g:airline#extensions#tabline#fnametruncate = 10
+  " let g:airline#extensions#tabline#left_sep = ''
+  " let g:airline#extensions#tabline#left_alt_sep = ''
+  " let g:airline#extensions#tabline#right_sep = ''
+  " let g:airline#extensions#tabline#right_alt_sep = ''
+  let g:airline#extensions#tabline#show_buffers = 0
+  let g:airline#extensions#tabline#show_splits = 0
   let g:airline#extensions#tabline#show_tabs = 1
-  let g:airline#extensions#tabline#tab_nr_type = 1 "tab number type is tab number
+  let g:airline#extensions#tabline#show_tab_nr = 1
   let g:airline#extensions#tabline#show_tab_type = 0
-  let g:airline#extensions#tabline#left_sep = ''
-  let g:airline#extensions#tabline#left_alt_sep = ''
-  let g:airline#extensions#tabline#right_sep = ''
-  let g:airline#extensions#tabline#right_alt_sep = ''
+  let g:airline#extensions#tabline#tab_nr_type = 1 "tab number type is tab number
+
+  let g:solarized_base16 = 1
 
   let g:neomake_ruby_enabled_makers = ['rubocop']
+  let g:neomake_javascript_enabled_makers = ['eslint']
+  let g:neomake_javascript_eslint_exe = system('PATH=$(npm bin):$PATH && which eslint | tr -d "\n"')
+
+  let g:jsx_ext_required = 0
 
 " Neovim ONLY
  " Windows navigation for terminal mode
