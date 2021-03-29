@@ -30,3 +30,4 @@ alias remotesync='git reset --hard `git branch -vv | grep "^*" | ag -o "(?<=\[)[
 
 alias pr='pry-remote'
 alias review='cd `git rev-parse --show-toplevel`; pronto run; cd - > /dev/null;'
+alias gpo='open "$(git push 2>&1 | tee /dev/stderr | grep -m 1 'https:.*' | cut -f2,3 -d: | tr -d '[:space:]')"'

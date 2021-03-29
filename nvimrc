@@ -80,6 +80,7 @@
  VAMActivate github:jelera/vim-javascript-syntax
  VAMActivate github:junegunn/fzf
  VAMActivate github:majutsushi/tagbar
+ VAMActivate github:leafgarland/typescript-vim
  VAMActivate github:mxw/vim-jsx
  VAMActivate github:MarcWeber/vim-addon-local-vimrc
  VAMActivate github:nathanaelkane/vim-indent-guides
@@ -204,6 +205,11 @@
   let g:neomake_ruby_enabled_makers = ['rubocop']
   let g:neomake_javascript_enabled_makers = ['eslint']
   let g:neomake_javascript_eslint_exe = system('PATH=$(npm bin):$PATH && which eslint | tr -d "\n"')
+  let g_neomake_typescript_tslint_maker = {
+  \ 'exe': 'tslint',
+  \ 'args': ['-r', '/usr/local/lib/node_modules/tslint-jsdoc-rules/lib', '--experimentalDecorators']
+  \ }
+  let g:neomake_typescript_enabled_makers = ['tslint']
 
   let g:jsx_ext_required = 0
 

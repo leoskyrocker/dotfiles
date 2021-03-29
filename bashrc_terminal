@@ -9,7 +9,7 @@
  WHITE=$(tput setaf 7)
  RESET=$(tput sgr 0)
 
- if brew list | grep coreutils > /dev/null ; then
+ if brew list --formula | grep coreutils > /dev/null ; then
    alias ls='gls -F --show-control-chars --color=auto'
    eval `gdircolors -b $HOME/.dircolors/solarized`
  fi

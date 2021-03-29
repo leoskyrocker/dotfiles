@@ -3,7 +3,7 @@ function git-not-dirty {
   if [[ $st == "" ]]
   then
     echo ""
-  elif [[ $st =~ "nothing to commit, working directory clean" ]]
+  elif [[ $st =~ "nothing to commit, working tree clean" ]]
   then
     echo " ✔"
   fi
@@ -14,7 +14,7 @@ function git-dirty {
   if [[ $st == "" ]]
   then
     echo ""
-  elif [[ ! ($st =~ "nothing to commit, working directory clean") ]]
+  elif [[ ! ($st =~ "nothing to commit, working tree clean") ]]
   then
     echo " ✖"
   fi
