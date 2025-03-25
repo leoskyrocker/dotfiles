@@ -48,7 +48,7 @@
    let c.plugin_root_dir = expand('$HOME', 1) . '/.nvim/vim-addons'
    let &rtp.=(empty(&rtp)?'':',').c.plugin_root_dir.'/vim-addon-manager'
    if !isdirectory(c.plugin_root_dir.'/vim-addon-manager/autoload')
-     execute '!git clone --depth=1 git://github.com/MarcWeber/vim-addon-manager '
+     execute '!git clone --depth=1 git@github.com:MarcWeber/vim-addon-manager.git '
          \       shellescape(c.plugin_root_dir.'/vim-addon-manager', 1)
    endif
    call vam#ActivateAddons([], {'auto_install' : 0})
@@ -87,6 +87,7 @@
 "  VAMActivate github:pangloss/vim-javascript
  VAMActivate github:scrooloose/nerdtree
  VAMActivate github:tpope/vim-bundler
+ VAMActivate github:tpope/vim-rhubarb
 "  VAMActivate html5
 "  VAMActivate molokai
  VAMActivate rails
@@ -200,8 +201,6 @@
   let g:airline#extensions#tabline#show_tab_type = 0
   let g:airline#extensions#tabline#tab_nr_type = 1 "tab number type is tab number
 
-  let g:solarized_base16 = 1
-
   let g:neomake_ruby_enabled_makers = ['rubocop']
   let g:neomake_javascript_enabled_makers = ['eslint']
   let g:neomake_javascript_eslint_exe = system('PATH=$(npm bin):$PATH && which eslint | tr -d "\n"')
@@ -219,7 +218,10 @@
  :tnoremap ∑ <C-\><C-n><C-w><C-w>
  :tnoremap ˙ <C-\><C-n><C-w>h
  :tnoremap ∆ <C-\><C-n><C-w>j
+
  :tnoremap ˚ <C-\><C-n><C-w>k
  :tnoremap ¬ <C-\><C-n><C-w>l
 
  autocmd BufWritePost * Neomake
+
+ let g:python3_host_prog = '/Users/leolei/.pyenv/shims/python'
